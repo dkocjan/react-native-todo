@@ -3,6 +3,7 @@ import {
   View,
   Text,
   StyleSheet,
+  ActivityIndicator,
   Platform,
   ListView,
   Keyboard,
@@ -27,6 +28,7 @@ class App extends Component {
       rowHasChanged: (r1, r2) => r1 !== r2
     })
     this.state = {
+      loading:     true,
       allComplete: false,
       filter:      'ALL',
       value:       '',
@@ -45,9 +47,11 @@ class App extends Component {
     AsyncStorage.getItem('items').then((json) => {
       try {
         const items = JSON.parse(json)
-        this.setSource(items, items)
-      } catch(e) {
-      
+        this.setSource(items, items, { loading: false })
+      } catch (e) {
+        this.setState({
+          loading: false
+        })
       }
     })
   }
@@ -140,12 +144,31 @@ class App extends Component {
           onFilter={this.handleFilter}
           filter={this.state.filter}
         />
+        {
+          this.state.loading &&
+          <View style={styles.loading}>
+            <ActivityIndicator
+              animating
+              size="large"
+            />
+          </View>
+        }
       </View>
     )
   }
 }
 
 const styles = StyleSheet.create({
+  loading:   {
+    position:        'absolute',
+    left:            0,
+    top:             0,
+    right:           0,
+    bottom:          0,
+    alignItems:      'center',
+    justifyContent:  'center',
+    backgroundColor: 'rgba(0, 0, 0, .2)'
+  },
   container: {
     flex:            1,
     backgroundColor: '#F5F5F5',

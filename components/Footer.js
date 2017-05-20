@@ -6,7 +6,7 @@ class Footer extends Component {
     const { filter } = this.props
     return (
       <View style={styles.container}>
-        
+        <Text>{this.props.count} to do</Text>
         <View style={styles.filters}>
           <TouchableOpacity
             style={[styles.filter, filter === 'ALL' && styles.selected]}
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     borderColor: 'transparent'
   },
   selected: {
-    borderColor: 'rgba(175, 47, 47, .2)'
+    borderColor: 'rgba(100, 100, 100, .2)'
   }
 })
 

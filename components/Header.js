@@ -25,6 +25,7 @@ class Header extends Component {
 const styles = StyleSheet.create({
   header: {
     paddingHorizontal: 16,
+    paddingVertical: 8,
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center'

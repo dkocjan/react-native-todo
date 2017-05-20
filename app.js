@@ -8,18 +8,34 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      value: '',
-      items: []
+      allComplete: false,
+      value:       '',
+      items:       []
     }
     this.handleAddItem = this.handleAddItem.bind(this)
+    this.handleToggleAllComplete = this.handleToggleAllComplete.bind(this)
   }
+  
+  handleToggleAllComplete() {
+    const complete = !this.state.allComplete
+    const newItems = this.state.items.map((item) => ({
+      ...item,
+      complete
+    }))
+    console.table(newItems)
+    this.setState({
+      items:       newItems,
+      allComplete: complete
+    })
+  }
+  
   handleAddItem() {
-    if(!this.state.value) return
+    if (!this.state.value) return
     const newItems = [
       ...this.state.items,
       {
-        key: Date.now(),
-        text: this.state.value,
+        key:      Date.now(),
+        text:     this.state.value,
         complete: false
       }
     ]
@@ -28,6 +44,7 @@ class App extends Component {
       value: ''
     })
   }
+  
   render() {
     return (
       <View style={styles.container}>
@@ -35,6 +52,7 @@ class App extends Component {
           value={this.state.value}
           onAddItem={this.handleAddItem}
           onChange={(value) => this.setState({ value })}
+          onToggleAllComplete={this.handleToggleAllComplete}
         />
         <View style={styles.content}>
         

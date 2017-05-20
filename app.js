@@ -49,7 +49,7 @@ class App extends Component {
     const newItems = this.state.items.filter((item) => {
       return item.key !== key
     })
-    this.setSource(newItems, filterItem(this.state.filter, newItems))
+    this.setSource(newItems, filterItems(this.state.filter, newItems))
   }
   
   handleToggleComplete(key, complete) {
@@ -60,7 +60,7 @@ class App extends Component {
         complete
       }
     })
-    this.setSource(newItems, filterItem(this.state.filter, newItems))
+    this.setSource(newItems, filterItems(this.state.filter, newItems))
   }
   
   handleToggleAllComplete() {
@@ -69,7 +69,7 @@ class App extends Component {
       ...item,
       complete
     }))
-    this.setSource(newItems, filterItem(this.state.filter, newItems), { allComplete: complete })
+    this.setSource(newItems, filterItems(this.state.filter, newItems), { allComplete: complete })
   }
   
   handleAddItem() {
@@ -82,7 +82,7 @@ class App extends Component {
         complete: false
       }
     ]
-    this.setSource(newItems, filterItem(this.state.filter, newItems), { value: '' })
+    this.setSource(newItems, filterItems(this.state.filter, newItems), { value: '' })
   }
   
   render() {
